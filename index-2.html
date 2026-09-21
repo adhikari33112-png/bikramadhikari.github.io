@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bikram Adhikari</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1F2A24;
+    --paper: #F0ECDF;
+    --paper-2: #E7E1CE;
+    --gold: #B8862E;
+    --walnut: #6B4226;
+    --muted: #6B6555;
+    --line: rgba(31,42,36,0.16);
+    --paper-on-dark: #F3EFE4;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); scroll-behavior: smooth; }
+  * { box-sizing: inherit; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #EDE7D8;
+      --paper: #171B16;
+      --paper-2: #1E241D;
+      --gold: #D4A94F;
+      --walnut: #C99B72;
+      --muted: #A39C89;
+      --line: rgba(237,231,216,0.16);
+      --paper-on-dark: #171B16;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #EDE7D8;
+    --paper: #171B16;
+    --paper-2: #1E241D;
+    --gold: #D4A94F;
+    --walnut: #C99B72;
+    --muted: #A39C89;
+    --line: rgba(237,231,216,0.16);
+    --paper-on-dark: #171B16;
+  }
+
+  h1, h2, h3, .serif { font-family: 'Source Serif 4', serif; font-weight: 600; }
+
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+
+  header.hero {
+    padding: 96px 0 72px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: flex-start;
+    gap: 44px;
+  }
+  .hero-text { flex: 1; min-width: 0; }
+  .portrait {
+    flex-shrink: 0;
+    width: 132px;
+    height: 132px;
+    object-fit: cover;
+    border: 1px solid var(--line);
+    filter: grayscale(0.15);
+  }
+  @media (max-width: 560px) {
+    header.hero { flex-direction: column-reverse; gap: 24px; }
+    .portrait { width: 96px; height: 96px; }
+  }
+  .kicker {
+    font-size: 15px;
+    color: var(--gold);
+    margin: 0 0 18px;
+    font-weight: 500;
+  }
+  h1.name {
+    font-size: clamp(40px, 8vw, 64px);
+    line-height: 1.05;
+    margin: 0 0 22px;
+    letter-spacing: -0.01em;
+  }
+  .lede {
+    font-size: 19px;
+    color: var(--muted);
+    max-width: 54ch;
+    margin: 0 0 28px;
+  }
+  .contact-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+    font-size: 15px;
+  }
+  .contact-row a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 1px;
+  }
+  .contact-row a:hover { color: var(--gold); }
+
+  section { padding: 64px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+
+  h2.section-title {
+    font-size: 28px;
+    margin: 0 0 34px;
+  }
+
+  p.about-text {
+    font-size: 17px;
+    max-width: 60ch;
+  }
+
+  /* Education timeline - genuine chronological sequence */
+  .timeline { position: relative; padding-left: 34px; }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 6px; top: 6px; bottom: 6px;
+    width: 1px;
+    background: var(--line);
+  }
+  .t-item { position: relative; padding-bottom: 40px; }
+  .t-item:last-child { padding-bottom: 0; }
+  .t-item::before {
+    content: attr(data-year);
+    position: absolute;
+    left: -34px;
+    top: 2px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--gold);
+    text-indent: -999px;
+    overflow: hidden;
+  }
+  .t-year { font-size: 13px; color: var(--gold); font-weight: 600; letter-spacing: 0.02em; }
+  .t-title { font-family: 'Source Serif 4', serif; font-size: 20px; font-weight: 600; margin: 4px 0 4px; }
+  .t-sub { color: var(--muted); font-size: 15px; margin: 0 0 6px; }
+  .t-detail { font-size: 15px; color: var(--ink); }
+
+  /* Experience */
+  .role { margin-bottom: 28px; }
+  .role:last-child { margin-bottom: 0; }
+  .role-title { font-family: 'Source Serif 4', serif; font-weight: 600; font-size: 19px; margin: 0 0 3px; }
+  .role-org { color: var(--muted); font-size: 15px; margin: 0; }
+
+  /* Skills */
+  .skill-groups { display: grid; grid-template-columns: 1fr 1fr; gap: 32px 40px; }
+  @media (max-width: 560px) { .skill-groups { grid-template-columns: 1fr; } }
+  .skill-group h3 {
+    font-size: 15px;
+    text-transform: none;
+    color: var(--walnut);
+    margin: 0 0 12px;
+    font-weight: 600;
+    font-family: 'IBM Plex Sans', sans-serif;
+  }
+  .skill-group ul { margin: 0; padding: 0; list-style: none; }
+  .skill-group li {
+    padding: 9px 0;
+    border-top: 1px solid var(--line);
+    font-size: 15px;
+  }
+  .skill-group li:first-child { border-top: none; }
+
+  /* Hobbies as a woven line, not cards */
+  .hobby-line {
+    font-size: 17px;
+    line-height: 2.1;
+  }
+  .hobby-line span { white-space: nowrap; }
+  .hobby-line span:not(:last-child)::after {
+    content: "·";
+    color: var(--gold);
+    margin: 0 12px;
+  }
+
+  footer {
+    padding: 56px 0 80px;
+    text-align: left;
+  }
+  footer .serif { font-size: 22px; margin: 0 0 10px; }
+  footer p { color: var(--muted); font-size: 15px; max-width: 50ch; margin: 0 0 22px; }
+  .btn {
+    display: inline-block;
+    color: var(--paper-on-dark);
+    background: var(--ink);
+    padding: 13px 26px;
+    text-decoration: none;
+    font-size: 15px;
+    border-radius: 2px;
+  }
+  .btn:hover { background: var(--gold); }
+
+  ::selection { background: var(--gold); color: var(--ink); }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="hero-text">
+      <p class="kicker">Bachelor of Education, University of Dhaka</p>
+      <h1 class="name">Bikram<br>Adhikari</h1>
+      <p class="lede">I teach, organize, and argue for a living — moving between classrooms, mess-hall committees, and debate floors, always trying to leave the room a little more capable than I found it.</p>
+      <div class="contact-row">
+        <a href="mailto:adhikari33112@gmail.com">adhikari33112@gmail.com</a>
+        <span style="color:var(--muted)">Jagannath Hall, Dhaka University</span>
+      </div>
+    </div>
+    <img class="portrait" src="data:image/jpeg;base64,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" alt="Portrait of Bikram Adhikari">
+  </header>
+
+  <section id="about">
+    <h2 class="section-title">About</h2>
+    <p class="about-text">I'm building a career around a simple standard: honesty, sincerity, and performance as the measures of good work. Whether I'm in front of a classroom, running a hostel mess, or preparing an argument for a debate, I try to bring the same discipline — show up prepared, treat people fairly, and do the unglamorous parts well.</p>
+  </section>
+
+  <section id="education">
+    <h2 class="section-title">Education</h2>
+    <div class="timeline">
+      <div class="t-item" data-year="2024">
+        <div class="t-year">2024</div>
+        <div class="t-title">Bachelor of Education (B.Ed.)</div>
+        <p class="t-sub">Institute of Education and Research, University of Dhaka</p>
+        <p class="t-detail">Subject: Education · Result: 3.70 / 4.00</p>
+      </div>
+      <div class="t-item" data-year="2020">
+        <div class="t-year">2020</div>
+        <div class="t-title">Higher Secondary Certificate</div>
+        <p class="t-sub">Moqbular Rahman Govt. College, Dinajpur Education Board</p>
+        <p class="t-detail">Group: Science · Result: 4.50 / 5.00</p>
+      </div>
+      <div class="t-item" data-year="2018">
+        <div class="t-year">2018</div>
+        <div class="t-title">Secondary School Certificate</div>
+        <p class="t-sub">Sonaher High School, Dinajpur Education Board</p>
+        <p class="t-detail">Group: Science · Result: 4.89 / 5.00</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <h2 class="section-title">Experience &amp; Leadership</h2>
+    <div class="role">
+      <p class="role-title">Intern Teacher</p>
+      <p class="role-org">University Laboratory School and College, IER, Dhaka University</p>
+    </div>
+    <div class="role">
+      <p class="role-title">Assistant General Secretary</p>
+      <p class="role-org">Bitarko Ekti Tarkik Sanghothan (debating organization)</p>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2 class="section-title">Skills</h2>
+    <div class="skill-groups">
+      <div class="skill-group">
+        <h3>Working knowledge</h3>
+        <ul>
+          <li>MS Office — Word, Excel, PowerPoint</li>
+          <li>Presentation &amp; public speaking</li>
+          <li>Bangla &amp; English, fluent in both</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>Working style</h3>
+        <ul>
+          <li>Team work</li>
+          <li>Problem solving</li>
+          <li>Strong communication</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="hobbies">
+    <h2 class="section-title">Outside of work</h2>
+    <p class="hobby-line">
+      <span>Travelling</span><span>Cooking</span><span>Teaching</span><span>Volunteering</span><span>Reading</span><span>Listening to music</span><span>Singing</span><span>Debating</span>
+    </p>
+  </section>
+
+  <footer>
+    <p class="serif">Let's talk.</p>
+    <p>Open to teaching, education-sector, and organizing roles. The fastest way to reach me is email.</p>
+    <a class="btn" href="mailto:adhikari33112@gmail.com">Contact me</a>
+  </footer>
+</div>
+
+</body>
+</html>
